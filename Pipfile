@@ -6,6 +6,12 @@ name = "pypi"
 [packages]
 
 [dev-packages]
+pytest = "*"
+black = "*"
+pylint = "*"
+pytest-cov = "*"
+pytest-asyncio = "*"
+coverage = "*"
 
 [requires]
 python_version = "3.11"
