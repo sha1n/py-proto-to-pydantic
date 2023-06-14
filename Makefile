@@ -4,8 +4,8 @@ APP_NAME ?= "llm_insight_generation"
 PYTEST_ARGS ?=
 
 LINT_FILES := $(shell git diff --name-only)
-LINT_FILES += $(shell git diff --name-only origin/HEAD)
-LINT_FILES := $(shell echo ${LINT_FILES} | uniq | xargs)
+LINT_FILES += $(shell git diff --name-only origin/master)
+LINT_FILES := $(shell echo ${LINT_FILES} | uniq | grep --color=never -E '\.py$$' | xargs)
 
 .PHONY: default
 default: setup
@@ -75,7 +75,7 @@ lint:
 .PHONY: .pylint
 .pylint:
 	@echo "Running pylint..."
-	@pipenv run pylint --rcfile=.pylintrc --output-format=colorized --reports=n --recursive=y $(LINT_FILES)
+	@pipenv run pylint --output-format=colorized --reports=n --recursive=y $(LINT_FILES)
 
 .PHONY: .black_check
 .black_check:
