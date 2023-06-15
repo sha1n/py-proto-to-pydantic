@@ -1,11 +1,13 @@
+# git symbolic-ref refs/remotes/origin/HEAD refs/remotes/origin/master
+
 REPO_PATH := $(shell git rev-parse --show-toplevel)
 PRE_COMMIT_HOOK_PATH := $(REPO_PATH)/.git/hooks/pre-commit
 APP_NAME ?= "llm_insight_generation"
 PYTEST_ARGS ?=
 
-LINT_FILES := $(shell git diff --name-only)
-LINT_FILES += $(shell git diff --name-only origin/master)
-LINT_FILES := $(shell echo ${LINT_FILES} | uniq | grep --color=never -E '\.py$$' | xargs)
+LINT_FILES := $(shell git diff --name-only | grep --color=never -E '\.py$$')
+LINT_FILES += $(shell git diff --name-only origin/HEAD | grep --color=never -E '\.py$$')
+LINT_FILES := $(shell echo ${LINT_FILES} | uniq | xargs)
 
 .PHONY: default
 default: setup
@@ -50,7 +52,7 @@ clean:
 
 .PHONY: format
 format:
-	@echo "Running black formatter..."
+	@echo "Running black formatter... $(LINT_FILES)"
 	@pipenv run black --safe $(LINT_FILES)
 
 .PHONY: lint
