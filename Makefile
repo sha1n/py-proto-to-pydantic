@@ -2,12 +2,16 @@
 
 REPO_PATH := $(shell git rev-parse --show-toplevel)
 PRE_COMMIT_HOOK_PATH := $(REPO_PATH)/.git/hooks/pre-commit
-APP_NAME ?= "llm_insight_generation"
 PYTEST_ARGS ?=
 
-LINT_FILES := $(shell git diff --name-only | grep --color=never -E '\.py$$')
-LINT_FILES += $(shell git diff --name-only origin/HEAD | grep --color=never -E '\.py$$')
-LINT_FILES := $(shell echo ${LINT_FILES} | uniq | xargs)
+ifndef CI
+	LINT_FILES := $(shell git diff --name-only | grep --color=never -E '\.py$$')
+	LINT_FILES += $(shell git diff --name-only origin/HEAD | grep --color=never -E '\.py$$')
+	LINT_FILES := $(shell echo ${LINT_FILES} | uniq | xargs)
+else
+	# On CI environment, list all the python files that have been modified between the current commit and master
+	LINT_FILES := $(shell git diff-tree --no-commit-id --name-only -r ${GITHUB_SHA} origin/master | grep --color=never -E '\.py$$' | xargs)
+endif
 
 .PHONY: default
 default: setup
