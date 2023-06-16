@@ -5,16 +5,20 @@ PRE_COMMIT_HOOK_PATH := $(REPO_PATH)/.git/hooks/pre-commit
 PYTEST_ARGS ?=
 
 ifndef CI
-	LINT_FILES := $(shell git diff --name-only | grep --color=never -E '\.py$$')
-	LINT_FILES += $(shell git diff --name-only origin/HEAD | grep --color=never -E '\.py$$')
-	LINT_FILES := $(shell echo ${LINT_FILES} | uniq | xargs)
+	DIRTY_FILES := $(shell git diff --name-only | grep --color=never -E '\.py$$')
+	MASTER_DIFF := $(shell git diff --name-only origin/HEAD | grep --color=never -E '\.py$$')
+	LINT_FILES := $(shell echo "${MASTER_DIFF}\n${DIRTY_FILES}" | sort | uniq | xargs)
 else
 	# On CI environment, list all the python files that have been modified between the current commit and master
-	LINT_FILES := $(shell git diff-tree --no-commit-id --name-only -r ${GITHUB_SHA} origin/master | grep --color=never -E '\.py$$' | xargs)
+	LINT_FILES := $(shell \
+		git diff-tree --no-commit-id --name-only -r ${GITHUB_SHA} origin/master | \
+		grep --color=never -E '\.py$$' | \
+		xargs \
+  	)
 endif
 
 .PHONY: default
-default: setup
+default: test
 
 .PHONY: setup
 setup:
@@ -22,8 +26,6 @@ setup:
 	@echo "#/usr/bin/env bash" > $(PRE_COMMIT_HOOK_PATH)
 	@echo "make lint" >> $(PRE_COMMIT_HOOK_PATH)
 	@chmod +x $(PRE_COMMIT_HOOK_PATH)
-	@echo "Syncing dependencies..."
-	@make sync-dev
 
 .PHONY: sync
 sync:
@@ -31,6 +33,7 @@ sync:
 
 .PHONY: sync-dev
 sync-dev:
+	@echo "Syncing dependencies..."
 	@pipenv sync --dev
 
 
@@ -82,6 +85,17 @@ lint:
 .pylint:
 	@echo "Running pylint..."
 	@pipenv run pylint --output-format=colorized --reports=n --recursive=y $(LINT_FILES)
+
+.PHONY: .flake8
+.flake8:
+	@if [ -z "$(LINT_FILES)" ]; then \
+		echo "flake8: empty file list"; \
+	else \
+		echo "$(LINT_FILES)"; \
+		echo "Running flake8..."; \
+		pipenv run flake8 --config=pyproject.toml $(LINT_FILES); \
+	fi
+
 
 .PHONY: .black_check
 .black_check:
