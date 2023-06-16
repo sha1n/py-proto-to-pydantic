@@ -1,8 +1,10 @@
 from fastapi.testclient import TestClient
+import pytest
 from myapp import server
 
 
-def test_root():
+@pytest.mark.it("Hello World")
+def test_http_get():
     client = TestClient(server.app)
     response = client.get("/")
 
