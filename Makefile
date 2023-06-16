@@ -5,8 +5,8 @@ PRE_COMMIT_HOOK_PATH := $(REPO_PATH)/.git/hooks/pre-commit
 PYTEST_ARGS ?=
 
 ifndef CI
-	DIRTY_FILES := $(shell git diff --name-only | grep --color=never -E '\.py$$')
-	MASTER_DIFF := $(shell git diff --name-only origin/HEAD | grep --color=never -E '\.py$$')
+	DIRTY_FILES := $(shell git diff --name-only --diff-filter=d | grep --color=never -E '\.py$$')
+	MASTER_DIFF := $(shell git diff --name-only --diff-filter=d origin/HEAD | grep --color=never -E '\.py$$')
 	LINT_FILES := $(shell echo "${MASTER_DIFF}\n${DIRTY_FILES}" | sort | uniq | xargs)
 else
 	# On CI environment, list all the python files that have been modified between the current commit and master
