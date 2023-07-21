@@ -24,43 +24,43 @@ default: test
 setup:
 	@echo "Installing pre-commit hook..."
 	@echo "#/usr/bin/env bash" > $(PRE_COMMIT_HOOK_PATH)
-	@echo "make lint" >> $(PRE_COMMIT_HOOK_PATH)
+	@echo "make verify" >> $(PRE_COMMIT_HOOK_PATH)
 	@chmod +x $(PRE_COMMIT_HOOK_PATH)
+
 
 .PHONY: sync
 sync:
-	@pipenv sync
-
-.PHONY: sync-dev
-sync-dev:
 	@echo "Syncing dependencies..."
-	@pipenv sync --dev
+	@poetry install
 
-
-.PHONY: install
-install:
-	@pipenv install
-
-.PHONY: update
-update:
-	@pipenv update
 
 .PHONY: test
-test: sync-dev .pytest
+test: sync .pytest
 
 .PHONY: coverage
 coverage: sync-dev .coverage
 
+.PHONY: build
+build: sync
+	@echo "Building package..."
+	@poetry build
+
 .PHONY: clean
 clean:
-	@rm -rf .pytest_cache
-	@pipenv clean
-	@pipenv --rm
+	@rm -rf .pytest_cache dist .coverage .coverage.xml
 
 .PHONY: format
 format:
-	@echo "Running black formatter... $(LINT_FILES)"
-	@pipenv run black --safe $(LINT_FILES)
+	@echo "Running black formatter..."
+	@poetry run black --safe $(LINT_FILES)
+
+.PHONY: verify
+verify: .poetry-check lint
+
+.PHONY: .poetry-check
+.poetry-check:
+	@echo "Running Poetry check..."
+	@poetry check
 
 .PHONY: lint
 lint:
@@ -73,32 +73,22 @@ lint:
 
 .PHONY: .coverage
 .coverage:
-	@pipenv run coverage report --skip-covered
-	@pipenv run coverage xml
+	@poetry run coverage report --skip-covered
+	@poetry run coverage xml
 
 .PHONY: .pytest
 .pytest:
-	@pipenv run pytest $(PYTEST_ARGS)
+	@poetry run pytest $(PYTEST_ARGS)
 
 
 .PHONY: .pylint
 .pylint:
 	@echo "Running pylint..."
-	@pipenv run pylint --output-format=colorized --reports=n --recursive=y $(LINT_FILES)
-
-.PHONY: .flake8
-.flake8:
-	@if [ -z "$(LINT_FILES)" ]; then \
-		echo "flake8: empty file list"; \
-	else \
-		echo "$(LINT_FILES)"; \
-		echo "Running flake8..."; \
-		pipenv run flake8 --config=pyproject.toml $(LINT_FILES); \
-	fi
+	@poetry run pylint --output-format=colorized --reports=n --recursive=y $(LINT_FILES)
 
 
 .PHONY: .black_check
 .black_check:
 	@echo "Running format checks..."
-	@pipenv run black --safe --check --diff --color $(LINT_FILES)
+	@poetry run black --safe --check --diff --color $(LINT_FILES)
 
