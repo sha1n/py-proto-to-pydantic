@@ -1,6 +1,6 @@
 from fastapi.testclient import TestClient
 import pytest
-from myapp import server
+from webapp import server
 
 
 @pytest.mark.it

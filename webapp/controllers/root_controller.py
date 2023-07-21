@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 
-from myapp.models.message import Message
+from webapp.models.message import Message
 
 router = APIRouter()
 

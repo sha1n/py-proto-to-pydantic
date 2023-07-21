@@ -2,7 +2,7 @@ import logging
 
 from fastapi import FastAPI
 
-from myapp.controllers import root_controller
+from webapp.controllers import root_controller
 
 app = FastAPI()
 
