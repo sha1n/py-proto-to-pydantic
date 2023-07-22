@@ -18,7 +18,7 @@ else
 endif
 
 .PHONY: default
-default: test
+default: install
 
 .PHONY: setup
 setup:
@@ -28,20 +28,25 @@ setup:
 	@chmod +x $(PRE_COMMIT_HOOK_PATH)
 
 
-.PHONY: sync
-sync:
-	@echo "Syncing dependencies..."
+.PHONY: install
+install:
+	@echo "Installing dependencies..."
 	@poetry install
+
+.PHONY: update
+update:
+	@echo "Updating dependencies..."
+	@poetry update
 
 
 .PHONY: test
-test: sync .pytest
+test: install .pytest
 
 .PHONY: coverage
-coverage: sync-dev .coverage
+coverage: .coverage
 
 .PHONY: build
-build: sync
+build: install
 	@echo "Building package..."
 	@poetry build
 

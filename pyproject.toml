@@ -3,7 +3,11 @@ name = "webapp"
 version = "0.1.0"
 description = ""
 authors = ["sha1n <sha1n@users.noreply.github.com>"]
+maintainers = ["sha1n <sha1n@users.noreply.github.com>"]
+license = "MIT"
+repository = "https://github.com/sha1n/py-template"
 readme = "README.md"
+keywords = ["python", "template", "Poetry", "FastAPI"]
 
 [tool.poetry.dependencies]
 python = ">=3.11,<3.12"
