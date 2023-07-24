@@ -29,9 +29,18 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "--asyncio-mode=auto --strict-markers"
+testpaths = [
+    "tests",
+]
 markers = [
-  "ut: unit tests", 
-  "it: integration tests",
+    "unit: unit tests",
+    "it: integration tests",
+]
+filterwarnings = [
+    "error", # treating all warnings as errors by default,
+    "ignore::DeprecationWarning",
 ]
 
 [tool.black]
