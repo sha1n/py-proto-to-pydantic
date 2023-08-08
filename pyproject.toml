@@ -11,8 +11,8 @@ keywords = ["python", "template", "Poetry", "FastAPI"]
 
 [tool.poetry.dependencies]
 python = ">=3.11,<3.12"
-fastapi = "^0.101.0"
 dataclasses-json = "^0.5.14"
+fastapi = "^0.101.0"
 
 
 [tool.poetry.group.dev.dependencies]
