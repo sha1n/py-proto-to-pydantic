@@ -5,9 +5,13 @@ PRE_COMMIT_HOOK_PATH := $(REPO_PATH)/.git/hooks/pre-commit
 PYTEST_ARGS ?=
 
 ifndef CI
+	# On non-CI environment, list all the python files that have been added or modified and not yet committed
 	DIRTY_FILES := $(shell git diff --name-only --diff-filter=d | grep --color=never -E '\.py$$')
-	MASTER_DIFF := $(shell git diff --name-only --diff-filter=d origin/HEAD | grep --color=never -E '\.py$$')
-	LINT_FILES := $(shell echo "${MASTER_DIFF}\n${DIRTY_FILES}" | sort | uniq | xargs)
+	# # Add committed files that have been added or modified relative to origin/master
+	# MASTER_DIFF := $(shell git diff --name-only --diff-filter=d origin/master | grep --color=never -E '\.py$$')
+	# # Combine the lists and remove duplicates
+	# LINT_FILES := $(sort $(filter %.py,$(shell echo -e "$(MASTER_DIFF)\n$(DIRTY_FILES)" | tr ' ' '\n' | sort | uniq)))
+	LINT_FILES := $(DIRTY_FILES)
 else
 	# On CI environment, list all the python files that have been modified between the current commit and master
 	LINT_FILES := $(shell \
@@ -71,7 +75,7 @@ verify: .poetry-check lint
 lint:
 	@# Only run linting on modified python files
 	@if [ -n "$(LINT_FILES)" ]; then \
-		make .pylint .black_check; \
+		make .mypy .pylint .black_check; \
 	else \
 		echo "lint: empty file list"; \
 	fi
@@ -97,3 +101,7 @@ lint:
 	@echo "Running format checks..."
 	@poetry run black --safe --check --diff --color $(LINT_FILES)
 
+.PHONY: .mypy
+.mypy:
+	@echo "Running mypy..."
+	@poetry run mypy $(LINT_FILES)
