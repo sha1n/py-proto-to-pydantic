@@ -8,11 +8,16 @@ license = "MIT"
 repository = "https://github.com/sha1n/py-template"
 readme = "README.md"
 keywords = ["python", "template", "Poetry", "FastAPI"]
+include = [
+    { path = "proto/**/*.proto", format = ["sdist", "wheel"] },
+    { path = "generated/**/*.py", format = ["sdist", "wheel"] },
+]
 
 [tool.poetry.dependencies]
 python = ">=3.11,<3.12"
 dataclasses-json = "^0.5.14"
 fastapi = "^0.101.0"
+grpcio = "^1.57.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.0"
@@ -23,6 +28,9 @@ pytest-cov = "^4.1.0"
 pytest-asyncio = "^0.21.1"
 coverage = "^7.2.7"
 httpx = "^0.24.1"
+grpcio-tools = "^1.57.0"
+faker = "^19.3.0"
+types-protobuf = "^4.24.0.0"
 
 [build-system]
 requires = ["poetry-core"]
@@ -45,6 +53,15 @@ filterwarnings = [
 
 [tool.black]
 line-length = 120
+
+[tool.mypy]
+python_version = "3.11"
+explicit_package_bases = true
+exclude = [
+    "generated",
+    "proto",
+]
+
 
 [tool.pylint.main]
 # Analyse import fallback blocks. This can be used to support both Python 2 and 3
@@ -445,6 +462,7 @@ disable = [
   "missing-class-docstring",
   "missing-function-docstring",
   "too-few-public-methods",
+  "no-name-in-module",                  # proto generated causes this regularly
 ]
 
 # Enable the message, report, category or checker with the given id(s). You can

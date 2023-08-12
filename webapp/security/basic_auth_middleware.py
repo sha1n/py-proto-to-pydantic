@@ -7,15 +7,14 @@ from typing import Iterable, Optional, Set, Tuple
 from fastapi import FastAPI
 from pydantic import FieldValidationInfo, field_validator
 from pydantic.dataclasses import dataclass
-from starlette.authentication import (AuthCredentials, AuthenticationBackend,
-                                      AuthenticationError, BaseUser,
-                                      SimpleUser)
+from starlette.authentication import AuthCredentials, AuthenticationBackend, AuthenticationError, BaseUser, SimpleUser
 from starlette.datastructures import URL
 from starlette.middleware.authentication import AuthenticationMiddleware
 from starlette.requests import HTTPConnection
 from starlette.responses import Response
 
 __logger = logging.getLogger(__name__)
+
 
 @dataclass(frozen=True, eq=True)
 class UserCredentials:
@@ -52,7 +51,6 @@ class AlwaysAllowAccessGuard(AccessGuard):
 
 
 class UserListAccessGuard(AccessGuard):
-
     def __init__(self, allowed_users: Iterable[UserCredentials] = ()):
         self._allowed_users: Set[UserCredentials] = set(allowed_users)
 
@@ -61,7 +59,7 @@ class UserListAccessGuard(AccessGuard):
 
 
 class BasicAuthBackend(AuthenticationBackend):
-    RESPONSE_HEADERS = {"WWW-Authenticate": "Basic realm=\"Authentication Required\""}
+    RESPONSE_HEADERS = {"WWW-Authenticate": 'Basic realm="Authentication Required"'}
     AUTHORIZATION_HEADER_NAME = "Authorization"
 
     def __init__(self, access_guard: AccessGuard):
@@ -73,7 +71,7 @@ class BasicAuthBackend(AuthenticationBackend):
 
         auth = conn.headers.get(self.AUTHORIZATION_HEADER_NAME)
         try:
-            scheme, credentials = auth.split()
+            scheme, credentials = auth.split()  # type: ignore
             if scheme.lower() == "basic":
                 decoded = base64.b64decode(credentials).decode("utf-8")
                 username, _, password = decoded.partition(":")
@@ -91,6 +89,7 @@ class BasicAuthBackend(AuthenticationBackend):
         raise UnauthorizedError()
 
     @classmethod
+    # pylint: disable=unused-argument
     def on_auth_error_callback(cls, connection: HTTPConnection, exception: Exception) -> Response:
         if isinstance(exception, UnauthorizedError):
             return Response(
