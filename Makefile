@@ -8,10 +8,9 @@ ifndef CI
 	# On non-CI environment, list all the python files that have been added or modified and not yet committed
 	DIRTY_FILES := $(shell git diff --name-only --diff-filter=d | grep --color=never -E '\.py$$')
 	# # Add committed files that have been added or modified relative to origin/master
-	# MASTER_DIFF := $(shell git diff --name-only --diff-filter=d origin/master | grep --color=never -E '\.py$$')
-	# # Combine the lists and remove duplicates
-	# LINT_FILES := $(sort $(filter %.py,$(shell echo -e "$(MASTER_DIFF)\n$(DIRTY_FILES)" | tr ' ' '\n' | sort | uniq)))
-	LINT_FILES := $(DIRTY_FILES)
+ 	MASTER_DIFF := $(shell git diff --name-only --diff-filter=d origin/master | grep --color=never -E '\.py$$')
+ 	# Combine the lists and remove duplicates
+ 	LINT_FILES := $(sort $(filter %.py,$(shell echo -e "$(MASTER_DIFF)\n$(DIRTY_FILES)" | tr ' ' '\n' | sort | uniq)))
 else
 	# On CI environment, list all the python files that have been modified between the current commit and master
 	LINT_FILES := $(shell \
@@ -42,15 +41,20 @@ update:
 	@echo "Updating dependencies..."
 	@poetry update
 
+.PHONY: generate-source
+generate-source: install
+	@echo "Generating source..."
+	@poetry run python -W ignore -m grpc_tools.protoc -I proto --python_out=generated/proto/webapp/api  proto/message.proto
+	@#protoc -I proto --python_out=generated/proto/webapp/api  proto/message.proto
 
 .PHONY: test
-test: install .pytest
+test: generate-source .pytest
 
 .PHONY: coverage
 coverage: .coverage
 
 .PHONY: build
-build: install
+build: generate-source install
 	@echo "Building package..."
 	@poetry build
 
