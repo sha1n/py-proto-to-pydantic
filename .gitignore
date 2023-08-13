@@ -1,5 +1,6 @@
 .coverage
 .vscode
 .pytest_cache
+.mypy_cache
 dist
-generated/**/*.py
+generated/**/*.py*

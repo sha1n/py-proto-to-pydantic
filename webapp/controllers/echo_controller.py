@@ -2,11 +2,10 @@ from fastapi import APIRouter
 from google.protobuf.json_format import MessageToJson, Parse
 from starlette.requests import Request
 
-from generated.proto.webapp.api.message_pb2 import Message  # type: ignore
+from webapp.controllers.types import JSONString
+from generated.proto.webapp.api.message_pb2 import Message
 
 router = APIRouter()
-
-JSONString = str
 
 
 @router.post("/echo")

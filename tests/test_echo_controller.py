@@ -1,7 +1,7 @@
 import pytest
 from google.protobuf.json_format import Parse, MessageToJson
 
-from generated.proto.webapp.api.message_pb2 import Message, Sender  # type: ignore
+from generated.proto.webapp.api.message_pb2 import Message, Sender
 from tests.conftest import ITContext
 
 

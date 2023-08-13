@@ -44,7 +44,7 @@ update:
 .PHONY: generate-source
 generate-source: install
 	@echo "Generating source..."
-	@poetry run python -W ignore -m grpc_tools.protoc -I proto --python_out=generated/proto/webapp/api  proto/message.proto
+	@poetry run python -W ignore -m grpc_tools.protoc -I proto --python_out=generated/proto/webapp/api --pyi_out=generated/proto/webapp/api proto/message.proto
 	@#protoc -I proto --python_out=generated/proto/webapp/api  proto/message.proto
 
 .PHONY: test
