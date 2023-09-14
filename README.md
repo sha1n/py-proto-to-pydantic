@@ -1,15 +1,5 @@
-[![Python application](https://github.com/sha1n/py-template/actions/workflows/python-test.yml/badge.svg)](https://github.com/sha1n/py-template/actions/workflows/python-test.yml)
+[![Python application](https://github.com/sha1n/py-proto-to-pydantic/actions/workflows/python-test.yml/badge.svg)](https://github.com/sha1n/py-proto-to-pydantic/actions/workflows/python-test.yml)
 
-# py-template
+# py-proto-to-pydantic
 
-Template project for FastAPI based Python web applications.
-
-- Python 3.x
-- Makefile
-- Poetry build system
-- TOML configuration
-  - Poetry
-  - PyLint
-  - Black
-  - PyTest
-  
+Experimenting with protobuf generated gRPC models and generated pydantic versions of them exposed via FastAPI
