@@ -3,4 +3,5 @@
 .pytest_cache
 .mypy_cache
 dist
-generated/**/*.py*
+webapp/api/generated/**/*.py*
+build

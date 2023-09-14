@@ -22,10 +22,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+      with:
+        ssh-key: ${{ secrets.SSH_KEY }}
+        submodules: true
     - name: Set up Python 3.11
       uses: actions/setup-python@v4
       with:
         python-version: "3.11"
+    - name: Install protoc
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y protobuf-compiler
     - name: Install
       run: |
         curl -sSL https://install.python-poetry.org | python -

@@ -1,7 +1,7 @@
 import pytest
 from google.protobuf.json_format import Parse
 
-from generated.proto.webapp.api.message_pb2 import Message
+from webapp.api.generated.message_service_pb2 import Message
 from tests.conftest import ITContext
 
 

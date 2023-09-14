@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from google.protobuf.json_format import MessageToJson
 
 from webapp.controllers.types import JSONString
-from generated.proto.webapp.api.message_pb2 import Message
+from webapp.api.generated.message_service_pb2 import Message
 
 router = APIRouter()
 

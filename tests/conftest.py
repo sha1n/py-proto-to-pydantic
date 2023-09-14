@@ -30,7 +30,7 @@ def context(client: TestClient, config: Tuple[str, str], faker: Faker) -> ITCont
 
 @fixture(scope="session")
 def client() -> TestClient:
-    from webapp.server import app
+    from webapp.http_server import app
 
     return TestClient(app)
 
@@ -43,8 +43,6 @@ def config(faker: Faker) -> Tuple[str, str]:
     os.environ["BASIC_AUTH_PASSWORD"] = password
 
     return username, password
-    # with patch.dict("os.environ", {"BASIC_AUTH_USERNAME": username, "BASIC_AUTH_PASSWORD": password}):
-    #     return username, password
 
 
 @fixture(scope="session")
