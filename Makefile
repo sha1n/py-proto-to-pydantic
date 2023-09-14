@@ -2,6 +2,10 @@ PYTHON_VERSION := "3.11"
 REPO_PATH := $(shell git rev-parse --show-toplevel)
 PRE_COMMIT_HOOK_PATH := $(REPO_PATH)/.git/hooks/pre-commit
 PYTEST_ARGS ?= "-vv"
+PROTO_GEN_SOURCES_DIR := "."
+GOPATH ?= $(HOME)/go
+GOBIN ?= $(GOPATH)/bin
+PATH := $(GOBIN):$(PATH)
 
 ifndef CI
 	# On non-CI environment, list all the python files that have been added or modified and not yet committed
@@ -46,9 +50,16 @@ update: .env
 .PHONY: generate-source
 generate-source: install
 	@echo "Generating source..."
-	@mkdir -p generated/proto/webapp/api
-	@poetry run python -W ignore -m grpc_tools.protoc -I proto --python_out=generated/proto/webapp/api --pyi_out=generated/proto/webapp/api proto/message.proto
-	@#protoc -I proto --python_out=generated/proto/webapp/api  proto/message.proto
+	@mkdir -p $(PROTO_GEN_SOURCES_DIR)
+	@go install github.com/google/gnostic/cmd/protoc-gen-openapi@latest
+	@poetry run python -W ignore -m grpc_tools.protoc -I/Users/shai/code/googleapis -I proto --grpc_python_out=$(PROTO_GEN_SOURCES_DIR) --python_out=$(PROTO_GEN_SOURCES_DIR) --pyi_out=$(PROTO_GEN_SOURCES_DIR) proto/webapp/api/generated/*.proto
+	@protoc proto/webapp/api/generated/*.proto -I=. -I=$(HOME)/code/googleapis --openapi_out=webapp/api/generated
+	@poetry run datamodel-codegen \
+	    --target-python-version=$(PYTHON_VERSION) \
+	    --input webapp/api/generated/openapi.yaml \
+	    --input-file-type openapi \
+	    --output webapp/api/generated/pydantic_models.py
+
 
 .PHONY: test
 test: generate-source .pytest
@@ -62,7 +73,7 @@ build: generate-source install
 clean:
 	@echo "Cleaning up..."
 	@poetry env remove --all
-	@rm -rf generated .pytest_cache dist .coverage .coverage.xml
+	@rm -rf webapp/api/generated .pytest_cache dist .coverage .coverage.xml
 
 .PHONY: format
 format:

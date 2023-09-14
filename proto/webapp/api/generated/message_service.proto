@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+
+option go_package = "package.placeholder";
+
+message Message {
+  string content = 1;
+  Sender sender = 2;
+}
+
+message Sender {
+  string name = 1;
+  string email = 2;
+}
+
+service MessageService {
+  rpc PostMessage(PostMessageRequest) returns (PostMessageResponse) {
+    option (google.api.http) = {
+      post: "/v1/messages"
+      body: "*"
+    };
+  };
+}
+
+message PostMessageRequest {
+  Message message = 1;
+}
+message PostMessageResponse {
+  Message message = 1;
+}
+

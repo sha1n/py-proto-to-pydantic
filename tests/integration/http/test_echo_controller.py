@@ -1,7 +1,7 @@
 import pytest
 from google.protobuf.json_format import Parse, MessageToJson
 
-from generated.proto.webapp.api.message_pb2 import Message, Sender
+from webapp.api.generated.message_service_pb2 import Message, Sender
 from tests.conftest import ITContext
 
 
@@ -23,7 +23,7 @@ def test_http_echo(context: ITContext):
             float_precision=2,
         ),
     )
-    actual_message = Parse(text=response.json(), message=Message())
+    actual_message = Parse(text=response.text, message=Message())
 
     assert response.status_code == 200
     assert actual_message == message
