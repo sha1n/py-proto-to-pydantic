@@ -16,7 +16,7 @@ include = [
 [tool.poetry.dependencies]
 python = ">=3.11,<3.12"
 fastapi = "^0.103.1"
-pydantic = "^2.3.0"
+pydantic = "^2.4.2"
 grpcio = "^1.57.0"
 uvicorn = "^0.23.2"
 grpcio-tools = "^1.57.0"
