@@ -330,13 +330,13 @@ toml = ["tomli"]
 
 [[package]]
 name = "datamodel-code-generator"
-version = "0.22.0"
+version = "0.22.1"
 description = "Datamodel Code Generator"
 optional = false
 python-versions = ">=3.7,<4.0"
 files = [
-    {file = "datamodel_code_generator-0.22.0-py3-none-any.whl", hash = "sha256:5cf8fc4fb6fe7aa750595a558cd4fcd43e36e862f40b0fa4cc123b4548b16a1e"},
-    {file = "datamodel_code_generator-0.22.0.tar.gz", hash = "sha256:73ebcefa498e39d0f210923856cb4a498bacc3b7bdea140cca7324e25f5c581b"},
+    {file = "datamodel_code_generator-0.22.1-py3-none-any.whl", hash = "sha256:ac1fbc4fa778c2a43f740740fd352ca4300f705044e112a0023af8d04f0b61af"},
+    {file = "datamodel_code_generator-0.22.1.tar.gz", hash = "sha256:48c8ce0b38b575bcc573237bb3faab696b072aa131b3f008c848d2c3b24a4417"},
 ]
 
 [package.dependencies]
@@ -349,7 +349,7 @@ jinja2 = ">=2.10.1,<4.0"
 openapi-spec-validator = ">=0.2.8,<=0.5.7"
 packaging = "*"
 prance = ">=0.18.2"
-pydantic = {version = ">=1.10.0,<3.0", extras = ["email"], markers = "python_version >= \"3.11\" and python_version < \"4.0\""}
+pydantic = {version = ">=1.10.0,<2.4.0 || >2.4.0,<3.0", extras = ["email"], markers = "python_version >= \"3.11\" and python_version < \"4.0\""}
 PySnooper = ">=0.4.1,<2.0.0"
 toml = ">=0.10.0,<1.0.0"
 
@@ -1931,4 +1931,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.11,<3.12"
-content-hash = "d78ca3589738349a79d3e74d9e68e94bead9c1e27a068747cad2b1c9b0776d65"
+content-hash = "997d01e0f8ee4360ecec175ef3d7419a3bc621a88778c5f5bfa0a2f4ce637380"
