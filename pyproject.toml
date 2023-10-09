@@ -21,7 +21,7 @@ grpcio = "^1.59.0"
 uvicorn = "^0.23.2"
 grpcio-tools = "^1.59.0"
 types-protobuf = "^4.24.0.2"
-protobuf = "^4.24.2"
+protobuf = "^4.24.4"
 google-api-python-client = "^2.102.0"
 
 [tool.poetry.group.dev.dependencies]
