@@ -34,7 +34,7 @@ pytest-asyncio = "^0.21.1"
 coverage = "^7.3.2"
 httpx = "^0.25.1"
 faker = "^19.13.0"
-pytest-xdist = "^3.3.1"
+pytest-xdist = "^3.4.0"
 datamodel-code-generator = "^0.22.1"
 
 [build-system]
