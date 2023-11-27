@@ -35,7 +35,7 @@ coverage = "^7.3.2"
 httpx = "^0.25.1"
 faker = "^20.1.0"
 pytest-xdist = "^3.4.0"
-datamodel-code-generator = "^0.24.2"
+datamodel-code-generator = "^0.25.1"
 
 [build-system]
 requires = ["poetry-core"]

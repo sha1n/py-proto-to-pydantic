@@ -293,13 +293,13 @@ toml = ["tomli"]
 
 [[package]]
 name = "datamodel-code-generator"
-version = "0.24.2"
+version = "0.25.1"
 description = "Datamodel Code Generator"
 optional = false
 python-versions = ">=3.7,<4.0"
 files = [
-    {file = "datamodel_code_generator-0.24.2-py3-none-any.whl", hash = "sha256:582c30466def12600d7165c5f624bb63a7e944eeaf8320f282518daf9ccb566c"},
-    {file = "datamodel_code_generator-0.24.2.tar.gz", hash = "sha256:d278c751038c8911efc82856ec549ac1e3e13134567387a4bb5ab7ddc6543162"},
+    {file = "datamodel_code_generator-0.25.1-py3-none-any.whl", hash = "sha256:87fc3585f497fbe194f3b436376955e68dd2d875b0af517d1efef8f36ab29e9c"},
+    {file = "datamodel_code_generator-0.25.1.tar.gz", hash = "sha256:1f991527e6433aa08100be60d876303f71e7c33823fbd6b2e54ad344e8928392"},
 ]
 
 [package.dependencies]
@@ -315,6 +315,7 @@ pyyaml = ">=6.0.1"
 
 [package.extras]
 debug = ["PySnooper (>=0.4.1,<2.0.0)"]
+graphql = ["graphql-core (>=3.2.3,<4.0.0)"]
 http = ["httpx"]
 validation = ["openapi-spec-validator (>=0.2.8,<0.7.0)", "prance (>=0.18.2)"]
 
@@ -1525,4 +1526,4 @@ standard = ["colorama (>=0.4)", "httptools (>=0.5.0)", "python-dotenv (>=0.13)",
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.11,<3.12"
-content-hash = "88cd7c0665ac7c10758175ce4c1836950f99db37d1a48bde21ed46fcc220a634"
+content-hash = "d0ead20d4455627928b972c460b39181f6ccdda9d228d88517680e3cc7275912"
