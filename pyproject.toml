@@ -14,7 +14,7 @@ include = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.11,<3.12"
+python = ">=3.12,<3.13"
 fastapi = "^0.109.0"
 pydantic = "^2.6.0"
 grpcio = "^1.60.0"
@@ -60,7 +60,7 @@ filterwarnings = [
 line-length = 120
 
 [tool.mypy]
-python_version = "3.11"
+python_version = "3.12"
 explicit_package_bases = true
 exclude = [
     "webapp/api/generated",
@@ -148,7 +148,7 @@ persistent = true
 
 # Minimum Python version to use for version dependent checks. Will default to the
 # version used to run pylint.
-py-version = "3.11"
+py-version = "3.12"
 
 # Discover python modules and packages in the file system subtree.
 recursive = true
