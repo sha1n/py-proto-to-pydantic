@@ -1,4 +1,4 @@
-PYTHON_VERSION := "3.11"
+PYTHON_VERSION := "3.12"
 REPO_PATH := $(shell git rev-parse --show-toplevel)
 PRE_COMMIT_HOOK_PATH := $(REPO_PATH)/.git/hooks/pre-commit
 PYTEST_ARGS ?= "-vv"
