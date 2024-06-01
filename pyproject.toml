@@ -15,7 +15,7 @@ include = [
 
 [tool.poetry.dependencies]
 python = ">=3.12,<3.13"
-fastapi = "^0.110.3"
+fastapi = "^0.111.0"
 pydantic = "^2.7.1"
 grpcio = "^1.63.0"
 uvicorn = "^0.29.0"
