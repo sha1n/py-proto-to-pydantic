@@ -22,7 +22,7 @@ uvicorn = "^0.30.1"
 grpcio-tools = "^1.62.2"
 types-protobuf = "^5.26.0.20240422"
 protobuf = "^4.25.3"
-google-api-python-client = "^2.135.0"
+google-api-python-client = "^2.139.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.2.2"
