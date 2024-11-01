@@ -20,7 +20,7 @@ pydantic = "^2.9.2"
 grpcio = "^1.66.2"
 uvicorn = "^0.31.0"
 grpcio-tools = "^1.62.3"
-types-protobuf = "^5.28.0.20240924"
+types-protobuf = "^5.28.3.20241030"
 protobuf = "^4.25.5"
 google-api-python-client = "^2.151.0"
 
