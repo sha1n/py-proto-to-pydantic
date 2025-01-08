@@ -17,7 +17,7 @@ include = [
 python = ">=3.12,<3.13"
 fastapi = "^0.115.5"
 pydantic = "^2.10.2"
-grpcio = "^1.68.0"
+grpcio = "^1.69.0"
 uvicorn = "^0.32.1"
 grpcio-tools = "^1.62.3"
 types-protobuf = "^5.28.3.20241030"
