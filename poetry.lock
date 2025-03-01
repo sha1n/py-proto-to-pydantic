@@ -322,31 +322,32 @@ toml = ["tomli"]
 
 [[package]]
 name = "datamodel-code-generator"
-version = "0.26.5"
+version = "0.28.2"
 description = "Datamodel Code Generator"
 optional = false
-python-versions = "<4.0,>=3.8"
+python-versions = ">=3.9"
 files = [
-    {file = "datamodel_code_generator-0.26.5-py3-none-any.whl", hash = "sha256:e32f986b9914a2b45093947043aa0192d704650be93151f78acf5c95676601ce"},
-    {file = "datamodel_code_generator-0.26.5.tar.gz", hash = "sha256:c4a94a7dbf7972129882732d9bcee44c9ae090f57c82edd58d237b9d48c40dd0"},
+    {file = "datamodel_code_generator-0.28.2-py3-none-any.whl", hash = "sha256:a2c425386c3f836c618ae276be57e460df323ac78f911b1b12d927ddffd70e73"},
+    {file = "datamodel_code_generator-0.28.2.tar.gz", hash = "sha256:5f16fe4d6acee79c1366f9ee68016eeec544fc0a2fec25ce47d35f7b7767e0fe"},
 ]
 
 [package.dependencies]
-argcomplete = ">=1.10,<4.0"
+argcomplete = ">=2.10.1,<4"
 black = ">=19.10b0"
-genson = ">=1.2.1,<2.0"
-inflect = ">=4.1.0,<6.0"
-isort = ">=4.3.21,<6.0"
-jinja2 = ">=2.10.1,<4.0"
+genson = ">=1.2.1,<2"
+inflect = ">=4.1,<6"
+isort = ">=4.3.21,<7"
+jinja2 = ">=2.10.1,<4"
 packaging = "*"
-pydantic = {version = ">=1.10.0,<2.0.0 || >2.0.0,<2.0.1 || >2.0.1,<2.4.0 || >2.4.0,<3.0", extras = ["email"], markers = "python_version >= \"3.12\" and python_version < \"4.0\""}
+pydantic = ">=1.5"
 pyyaml = ">=6.0.1"
 
 [package.extras]
-debug = ["PySnooper (>=0.4.1,<2.0.0)"]
-graphql = ["graphql-core (>=3.2.3,<4.0.0)"]
-http = ["httpx"]
-validation = ["openapi-spec-validator (>=0.2.8,<0.7.0)", "prance (>=0.18.2)"]
+all = ["graphql-core (>=3.2.3)", "httpx (>=0.24.1)", "openapi-spec-validator (>=0.2.8,<0.7)", "prance (>=0.18.2)", "pysnooper (>=0.4.1,<2)"]
+debug = ["pysnooper (>=0.4.1,<2)"]
+graphql = ["graphql-core (>=3.2.3)"]
+http = ["httpx (>=0.24.1)"]
+validation = ["openapi-spec-validator (>=0.2.8,<0.7)", "prance (>=0.18.2)"]
 
 [[package]]
 name = "dill"
@@ -362,41 +363,6 @@ files = [
 [package.extras]
 graph = ["objgraph (>=1.7.2)"]
 profile = ["gprof2dot (>=2022.7.29)"]
-
-[[package]]
-name = "dnspython"
-version = "2.6.1"
-description = "DNS toolkit"
-optional = false
-python-versions = ">=3.8"
-files = [
-    {file = "dnspython-2.6.1-py3-none-any.whl", hash = "sha256:5ef3b9680161f6fa89daf8ad451b5f1a33b18ae8a1c6778cdf4b43f08c0a6e50"},
-    {file = "dnspython-2.6.1.tar.gz", hash = "sha256:e8f0f9c23a7b7cb99ded64e6c3a6f3e701d78f50c55e002b839dea7225cff7cc"},
-]
-
-[package.extras]
-dev = ["black (>=23.1.0)", "coverage (>=7.0)", "flake8 (>=7)", "mypy (>=1.8)", "pylint (>=3)", "pytest (>=7.4)", "pytest-cov (>=4.1.0)", "sphinx (>=7.2.0)", "twine (>=4.0.0)", "wheel (>=0.42.0)"]
-dnssec = ["cryptography (>=41)"]
-doh = ["h2 (>=4.1.0)", "httpcore (>=1.0.0)", "httpx (>=0.26.0)"]
-doq = ["aioquic (>=0.9.25)"]
-idna = ["idna (>=3.6)"]
-trio = ["trio (>=0.23)"]
-wmi = ["wmi (>=1.5.1)"]
-
-[[package]]
-name = "email-validator"
-version = "2.1.0.post1"
-description = "A robust email address syntax and deliverability validation library."
-optional = false
-python-versions = ">=3.8"
-files = [
-    {file = "email_validator-2.1.0.post1-py3-none-any.whl", hash = "sha256:c973053efbeddfef924dc0bd93f6e77a1ea7ee0fce935aea7103c7a3d6d2d637"},
-    {file = "email_validator-2.1.0.post1.tar.gz", hash = "sha256:a4b0bd1cf55f073b924258d19321b1f3aa74b4b5a71a42c305575dba920e1a44"},
-]
-
-[package.dependencies]
-dnspython = ">=2.0.0"
-idna = ">=2.0.0"
 
 [[package]]
 name = "execnet"
@@ -1078,7 +1044,6 @@ files = [
 
 [package.dependencies]
 annotated-types = ">=0.6.0"
-email-validator = {version = ">=2.0.0", optional = true, markers = "extra == \"email\""}
 pydantic-core = "2.27.2"
 typing-extensions = ">=4.12.2"
 
@@ -1557,4 +1522,4 @@ standard = ["colorama (>=0.4)", "httptools (>=0.6.3)", "python-dotenv (>=0.13)",
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.12,<3.13"
-content-hash = "008f1b4ec8054f11aada1cae9b76cdb1665210777270b136e33cfe685dc9c88c"
+content-hash = "37598a7d1a08e93d04698044ced075fdb0a5ba11d4f62a09c00c18f4a9954fbe"
