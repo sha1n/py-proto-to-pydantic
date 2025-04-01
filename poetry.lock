@@ -335,14 +335,14 @@ toml = ["tomli ; python_full_version <= \"3.11.0a6\""]
 
 [[package]]
 name = "datamodel-code-generator"
-version = "0.28.2"
+version = "0.28.5"
 description = "Datamodel Code Generator"
 optional = false
 python-versions = ">=3.9"
 groups = ["dev"]
 files = [
-    {file = "datamodel_code_generator-0.28.2-py3-none-any.whl", hash = "sha256:a2c425386c3f836c618ae276be57e460df323ac78f911b1b12d927ddffd70e73"},
-    {file = "datamodel_code_generator-0.28.2.tar.gz", hash = "sha256:5f16fe4d6acee79c1366f9ee68016eeec544fc0a2fec25ce47d35f7b7767e0fe"},
+    {file = "datamodel_code_generator-0.28.5-py3-none-any.whl", hash = "sha256:f899c1da5af04b5d5b6e3edbd718c1bf3a00fc4b2fe8210cef609d93a9983e9e"},
+    {file = "datamodel_code_generator-0.28.5.tar.gz", hash = "sha256:20e8b817d301d2d0bb15f436e81c97b25ad1c2ef922c99249c2444141ae15a6a"},
 ]
 
 [package.dependencies]
@@ -357,10 +357,11 @@ pydantic = ">=1.5"
 pyyaml = ">=6.0.1"
 
 [package.extras]
-all = ["graphql-core (>=3.2.3)", "httpx (>=0.24.1)", "openapi-spec-validator (>=0.2.8,<0.7)", "prance (>=0.18.2)", "pysnooper (>=0.4.1,<2)"]
+all = ["graphql-core (>=3.2.3)", "httpx (>=0.24.1)", "openapi-spec-validator (>=0.2.8,<0.7)", "prance (>=0.18.2)", "pysnooper (>=0.4.1,<2)", "ruff (>=0.9.10)"]
 debug = ["pysnooper (>=0.4.1,<2)"]
 graphql = ["graphql-core (>=3.2.3)"]
 http = ["httpx (>=0.24.1)"]
+ruff = ["ruff (>=0.9.10)"]
 validation = ["openapi-spec-validator (>=0.2.8,<0.7)", "prance (>=0.18.2)"]
 
 [[package]]
@@ -1583,4 +1584,4 @@ standard = ["colorama (>=0.4) ; sys_platform == \"win32\"", "httptools (>=0.6.3)
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12,<3.13"
-content-hash = "409e9bc5469c23f577687b22b82f0ce60cf79c96574076224d031b2d6bca9d80"
+content-hash = "9696cd0374e614e7f4ec0c1d3cecf5c9c8560493cee6f7c296739a9747c571d7"
