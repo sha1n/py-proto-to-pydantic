@@ -27,7 +27,7 @@ google-api-python-client = "^2.162.0"
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.5"
 black = "^25.1.0"
-pylint = "^3.3.4"
+pylint = "^3.3.6"
 mypy = "^1.15.0"
 pytest-cov = "^6.0.0"
 pytest-asyncio = "^0.26.0"
